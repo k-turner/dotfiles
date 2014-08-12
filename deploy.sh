@@ -5,18 +5,21 @@ DOTFILES=("ZSH" "TMUX" "VIM")
 
 ## zsh
 DIR_ZSH=zsh
-DOT_ZSH=${DIR_ZSH}/.zshrc
-DIST_ZSH=~/${ZSHDOT}
+DOT_ZSH=.zshrc
+SRC_ZSH=${DIR_ZSH}/${DOT_ZSH}
+DEST_ZSH=~/${DOT_ZSH}
 
 ## tmux
 DIR_TMUX=tmux
-DOT_TMUX=${DIR_TMUX}/.tmux.conf
-DIST_TMUX=~/${TMUXDOT}
+DOT_TMUX=.tmux.conf
+SRC_TMUX=${DIR_TMUX}/${DOT_TMUX}
+DEST_TMUX=~/${DOT_TMUX}
 
 ## vim
 DIR_VIM=vim
-DOT_VIM=${DIR_VIM}/.vimrc
-DIST_VIM=~/${VIMDOT}
+DOT_VIM=.vimrc
+SRC_VIM=${DIR_VIM}/${DOT_VIM}
+DEST_VIM=~/${DOT_VIM}
 
 cd $(dirname $0)
 CURRENT=`pwd`
@@ -25,10 +28,10 @@ echo "Deploy dotfiles on your environment."
 for TGT in ${DOTFILES[@]};do
 	LTGT=$(echo $TGT | tr [A-Z] [a-z])
 	echo "deploy ${LTGT} dotfile...."
-	SRC=$(eval 'echo $DOT_'${TGT})
-	DIST=$(eval 'echo $DIST_'${TGT})
-	cp ${SRC} ${DIST}
-	if [ $? -eq 0];then
+	SRC=$(eval 'echo $SRC_'${TGT})
+	DEST=$(eval 'echo $DEST_'${TGT})
+	cp ${SRC} ${DEST}
+	if [ $? -eq 0 ];then
 		 echo "Success to deploy ${LTGT} dotfile."
 	else
 		exit 1;

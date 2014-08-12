@@ -42,6 +42,8 @@ NeoBundleCheck
 NeoBundle 'itchyny/lightline.vim'
 " NERD tree
 NeoBundle 'scrooloose/nerdtree'
+let g:NERDTreeDirArrows=0
+
 " jedi-vim (for python)
 NeoBundle 'davidhalter/jedi-vim'
 
