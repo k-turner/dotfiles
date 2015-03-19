@@ -1,5 +1,14 @@
-autoload -U compinit
-compinit
+autoload -U compinit && compinit
+
+# complement
+function _ssh {
+	if [ -f ~/.ssh/config ];then
+		compadd `fgrep 'Host ' ~/.ssh/config | awk '{print $2}' | sort`;
+  fi
+	if [ -f ~/.ssh/known_hosts ];then
+		compadd `cat ~/.ssh/known_hosts | tr ',' ' ' | cut -d' ' -f1`;
+	fi
+}
 
 # prompt
 case ${UID} in
